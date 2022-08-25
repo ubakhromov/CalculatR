@@ -1,17 +1,28 @@
-﻿System.Console.Write("Type 1st number: ");
-int firstNumber = int.Parse(Console.ReadLine());
-System.Console.Write("\nType 2nd number: ");
-int secondNumber = int.Parse(Console.ReadLine());
+﻿using System;
+using CalculatR;
 
-System.Console.WriteLine("Choose the operations: +,-,*,/,%");
-string operation = Console.ReadLine();
-
-string result = operation switch 
+class Program
 {
-    "+" => $"{firstNumber} + {secondNumber} = {firstNumber + secondNumber}",
-    "-" => $"{firstNumber} - {secondNumber} = {firstNumber - secondNumber}",
-    "*" => $"{firstNumber} * {secondNumber} = {firstNumber * secondNumber}",
-    "/" => $"{firstNumber} / {secondNumber} = {firstNumber / secondNumber}",
-    "%" => $"{firstNumber} % {secondNumber} = {firstNumber % secondNumber}"
-};
-System.Console.WriteLine(result);
+    static void Main(string[] args)
+    {
+        Security security = new Security();
+        Calculator calculator = new Calculator();
+
+        security.CheckPassword();
+        calculator.GetInputs();
+
+        string message =
+           !(calculator.IsFirstNumberPositive())
+                ? "1st number is not positive"
+                : "1st number is not negative";
+        Console.WriteLine(message);
+
+        calculator.CompareInputs();
+        string result = calculator.Calculate();
+        Console.WriteLine(result);
+        calculator.PrintEvenNumbers();
+        calculator.MultiplicationTable();
+
+    }
+
+}
